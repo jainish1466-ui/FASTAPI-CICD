@@ -1,37 +1,61 @@
 from fastapi import APIRouter, Response
-from controllers.productController import create_product_controller,update_product_controller,get_products_controller,get_product_by_id,delete_product_controller
-from models.productModel import Product
 
-productRouter = APIRouter(
-    prefix="/products",
-    tags=["Products"]
+from controllers.productController import (
+    create_student_controller,
+    get_students_controller,
+    get_student_by_id_controller,
+    update_student_controller,
+    delete_student_controller
 )
 
-# Create Product
-@productRouter.post("/postproducts")
-async def create_product(product: Product, response: Response):
-    return await create_product_controller(product, response)
-
-# Get All Products
-@productRouter.get("/getproducts")
-async def get_product( response: Response):
-    return await get_products_controller(response)
+from models.productModel import Student
 
 
-
-# Get Product by ID
-@productRouter.get("/getproducts/{id}")
-def get_product(id: int, response: Response):
-    return get_product_by_id(id, response)
-    
-
-# Update Product
-@productRouter.put("/putproducts/{id}")
-def update_product(id: int, product: Product, response: Response):
-    return update_product_controller(id, product, response)
+studentRouter = APIRouter(
+    prefix="/students",
+    tags=["Students"]
+)
 
 
-# Delete Product
-@productRouter.delete("/deleteproducts/{id}")
-def delete_product(id: int, response: Response):
-    return delete_product_controller(id, response)
+# Create Student
+@studentRouter.post("/create")
+def create_student(student: Student, response: Response):
+    return create_student_controller(student, response)
+
+
+# Get All Students
+@studentRouter.get("/all")
+def get_students(response: Response):
+    return get_students_controller(response)
+
+
+# Get Student by ID
+@studentRouter.get("/{student_id}")
+def get_student(student_id: int, response: Response):
+    return get_student_by_id_controller(student_id, response)
+
+
+# Update Student
+@studentRouter.put("/{student_id}")
+def update_student(
+    student_id: int,
+    student: Student,
+    response: Response
+):
+    return update_student_controller(
+        student_id,
+        student,
+        response
+    )
+
+
+# Delete Student
+@studentRouter.delete("/{student_id}")
+def delete_student(
+    student_id: int,
+    response: Response
+):
+    return delete_student_controller(
+        student_id,
+        response
+    )
