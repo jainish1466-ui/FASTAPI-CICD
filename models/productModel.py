@@ -1,9 +1,9 @@
 from pydantic import BaseModel
-from typing import Optional
 
-# Product model
-class Product(BaseModel):
-    id: Optional[int] = None
+
+class Student(BaseModel):
+    id: int | None = None
     name: str
-    price: int
-    description: str
+    email: str
+    course: str
+    semester: int
