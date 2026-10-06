@@ -1,6 +1,17 @@
 from fastapi import FastAPI
-from routers.productRouter import productRouter
+from routers.productRouter import studentRouter
 
-app = FastAPI()
 
-app.include_router(productRouter)
+app = FastAPI(
+    title="FastAPI Student CRUD"
+)
+
+
+app.include_router(studentRouter)
+
+
+@app.get("/")
+def home():
+    return {
+        "message": "FastAPI Student CRUD API is running"
+    }
